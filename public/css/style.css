@@ -1,0 +1,78 @@
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* NAV SEARCH BOX */
+.input-group input:focus,
+.input-group button:hover {
+  border-color: #0056b3;
+  box-shadow: 0 0 5px rgba(0, 86, 179, 0.6);
+}
+
+.input-group input:focus {
+  outline: none;
+}
+
+.nav-link:hover {
+  color: #f8f9fa !important;
+  transition: color 0.3s ease;
+}
+
+
+
+/* About Section Hover Effects */
+.about-img {
+  transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+}
+
+.about-img:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+
+
+/* Hover Effects on Text List */
+.list-unstyled li {
+  transition: transform 0.3s ease;
+}
+
+.list-unstyled li:hover {
+  transform: translateX(10px);
+}
+
+/* Button Hover Effect */
+.btn-success {
+  position: relative;
+  overflow: hidden;
+  border-radius: 25px;
+}
+
+.btn-success::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.4s ease;
+}
+
+.btn-success:hover::after {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.btn-success:hover {
+  background-color: #28a745;
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #about .text-center {
+    text-align: center;
+  }
+}

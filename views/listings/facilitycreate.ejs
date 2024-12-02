@@ -1,0 +1,68 @@
+<% layout('layout/boilerplate') %>
+  <!-- Facilities Section -->
+  <div class="row mt-3 mb-3">
+    <div class="col-8 offset-2">
+      <br><br>
+      <h3>Add Facilities</h3>
+      <form method="post" action="/facilitate" class="needs-validation" novalidate>
+        <div class="mb-3">
+          <label for="FacillityTitle" class="form-label">Facillity Title</label>
+          <input type="text" npme="FacillityTitle" class="form-control" id="FacillityTitle"
+            placeholder="Enter your Facillity Title" required />
+        </div>
+
+        <div class="mb-3">
+          <label for="FacillityCategory" class="form-label">Facillity Category</label>
+          <input type="text" name="FacillityCategory" class="form-control" id="FacillityCategory"
+            placeholder="Enter your Facillity Category" required />
+        </div>
+
+        <div class="mb-3">
+          <label for="FacillityDescription" class="form-label">Facillity Description</label>
+          <textarea class="form-control" id="FacillityDescription" name="FacillityDescription"
+            placeholder="Enter your Facillity Description" rows="5" required></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label for="FacillityAddress" class="form-label">Facillity Address</label>
+          <input type="text" class="form-control" id="FacillityAddress" name="FacillityAddress"
+            placeholder="Enter your Facillity Address" required />
+        </div>
+
+        <div class="mb-3">
+          <label for="FacillityLatitude" class="form-label">Facillity Latitude</label>
+          <input type="number" name="FacillityLatitude" class="form-control" id="FacillityLatitude"
+            placeholder="Enter your Facillity Latitude" required />
+        </div>
+
+        <div class="mb-3">
+          <label for="FacillityLongitude" class="form-label">Facillity Longitude</label>
+          <input type="number" name="FacillityLongitude" class="form-control" id="FacillityLongitude"
+            placeholder="Enter your Facillity Longitude" required />
+        </div>
+
+        <div class="mb-3">
+          <label for="FacillityPostcode" class="form-label">Facillity Postcode</label>
+          <input type="number" name="FacillityPostcode" class="form-control" id="FacillityPostcode"
+            placeholder="Enter your Facillity Postcode" required />
+        </div>
+
+        <div class="mb-3">
+          <label for="FacillityStatus" class="form-label">Facillity Status</label>
+          <select class="form-control" name="FacillityStatus" id="FacillityStatus">
+            <option value="">Select Status</option>
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="FacillityImage" class="form-label">Facillity Image</label>
+          <input type="file" name="FacillityStatus" class="form-control" id="FacillityImage" accept="image/*"
+            required />
+        </div>
+
+        <button type="submit" class="btn btn-primary">ADD</button>
+      </form>
+    </div>
+  </div>
