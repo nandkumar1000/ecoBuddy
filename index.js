@@ -7,6 +7,7 @@ const connectionDatbase = require("./config/mongoose");
 const path = require('path');
 // require datbases data connecting
 const dataconnect = require("./model/Facillites");
+const Review = require('./model/Feedback')
 // Templating engine
 const ejsMate = require("ejs-mate");
 app.engine("ejs", ejsMate);
@@ -39,8 +40,9 @@ app.get("/about", (req, res) => {
 app.get("/facilitate", async (req, res) => {
   try {
     const facilities = await dataconnect.find();
+    const reviews = await Review.find();
     console.log(facilities);
-    res.render("listings/facilityshow.ejs", { facilities });
+    res.render("listings/facilityshow.ejs", { facilities, reviews });
   } catch (error) {
     console.error("Error fetching facilities:", error);
     res.status(500).render("listings/error.ejs");
@@ -53,11 +55,12 @@ app.get("/facilitatecreate", (req, res) => {
 });
 
 // for showing data
-app.post("/facilitate", async (req, res) => {
+app.post("/facilitatecreate", async (req, res) => {
   try {
-    const facilities = await dataconnect.find();
-    console.log(facilities);
-    res.render("listings/facilityshow.ejs", { facilities });
+    // const facilities = await dataconnect.find();
+    // console.log(facilities);
+    // res.render("listings/facilityshow.ejs", { facilities });
+    res.redirect("/facilitate")
   } catch (error) {
     console.error("Error fetching facilities:", error);
     res.status(500).render("listings/error.ejs");
