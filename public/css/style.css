@@ -1,3 +1,4 @@
+/* for rest */
 body {
   font-family: 'Poppins', sans-serif;
 }
@@ -75,4 +76,70 @@ body {
   #about .text-center {
     text-align: center;
   }
+}
+
+/* for login page  */
+.form-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f9fa;
+  position: relative;
+}
+
+.shape {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.shape1 {
+  width: 200px;
+  height: 200px;
+  top: -5rem;
+  left: -5rem;
+  background: linear-gradient(180deg, #12192c 0%, rgba(196, 196, 196, 0) 100%);
+}
+
+.shape2 {
+  width: 200px;
+  height: 200px;
+  bottom: -5rem;
+  right: -5rem;
+  background: linear-gradient(180deg, #12192c 0%, rgba(196, 196, 196, 0) 100%);
+}
+
+.form-box {
+  z-index: 1;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.form-title {
+  font-size: 2rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+.form-social-icon {
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #adb5bd;
+  color: white;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0.5rem;
+  transition: all 0.3s;
+}
+
+.form-social-icon:hover {
+  background: #12192c;
 }

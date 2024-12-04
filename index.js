@@ -41,7 +41,7 @@ app.get("/facilitate", async (req, res) => {
   try {
     const facilities = await dataconnect.find();
     const reviews = await Review.find();
-    console.log(facilities);
+    // console.log(facilities);
     res.render("listings/facilityshow.ejs", { facilities, reviews });
   } catch (error) {
     console.error("Error fetching facilities:", error);
@@ -57,9 +57,6 @@ app.get("/facilitatecreate", (req, res) => {
 // for showing data
 app.post("/facilitatecreate", async (req, res) => {
   try {
-    // const facilities = await dataconnect.find();
-    // console.log(facilities);
-    // res.render("listings/facilityshow.ejs", { facilities });
     res.redirect("/facilitate")
   } catch (error) {
     console.error("Error fetching facilities:", error);
@@ -78,12 +75,23 @@ app.get("/facility/:id", async (req, res) => {
   }
 });
 
-
-
 // edit route
 app.post("/edit/:id", (req, res) => {
   res.render("listings/facilityedit.ejs");
 })
+// for register 
+app.get("/register", (req, res) => {
+  res.render("listings/register.ejs");
+});
+
+// for login route
+app.get("/login", (req, res) => {
+  res.render("listings/login.ejs");
+})
+// for manageportal 
+app.get("/manageportal", (req, res) => {
+  res.render("listings/manageportal.ejs");
+});
 
 // for universal error
 app.get('*', (req, res) => {
