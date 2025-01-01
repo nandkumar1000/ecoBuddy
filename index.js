@@ -63,22 +63,54 @@ app.post("/facilitatecreate", async (req, res) => {
     res.status(500).render("listings/error.ejs");
   }
 });
-// FOR SPECIFIC ID 
-app.get("/facility/:id", async (req, res) => {
+
+// Render the Edit Review Form
+app.get('/facility/:facilityId/reviews/:reviewId/edit', async (req, res) => {
   try {
-    const facility = await dataconnect.findById(req.params.id);
-    const reviews = await Review.find({ facility: facility._id });
-    res.render("listings/facilityshow.ejs", { facility, reviews });
+    const { facilityId, reviewId } = req.params;
+    const review = await Review.findById(reviewId);
+
+    if (!review) {
+      return res.status(404).render('listings/error.ejs', { message: 'Review not found' });
+    }
+
+    res.render('listings/reviewedit.ejs', { facilityId, review });
   } catch (error) {
-    console.error("Error fetching facility:", error);
-    res.status(500).render("listings/error.ejs");
+    console.error('Error fetching review for editing:', error);
+    res.status(500).render('listings/error.ejs');
   }
 });
 
-// edit route
-app.post("/edit/:id", (req, res) => {
-  res.render("listings/facilityedit.ejs");
-})
+// Handle Review Update Logic
+app.put('/facility/:facilityId/reviews/:reviewId', async (req, res) => {
+  try {
+    const { facilityId, reviewId } = req.params;
+    const { rating, comment } = req.body;
+
+    await Review.findByIdAndUpdate(reviewId, { rating, comment });
+    res.redirect(`/facility/${facilityId}`);
+  } catch (error) {
+    console.error('Error updating review:', error);
+    res.status(500).render('listings/error.ejs');
+  }
+});
+// Handle Review Deletion
+app.delete('/facility/:facilityId/reviews/:reviewId', async (req, res) => {
+  try {
+    const { facilityId, reviewId } = req.params;
+
+    await Review.findByIdAndDelete(reviewId);
+    res.redirect(`/facility/${facilityId}`);
+  } catch (error) {
+    console.error('Error deleting review:', error);
+    res.status(500).render('listings/error.ejs');
+  }
+});
+
+
+
+
+
 // for register 
 app.get("/register", (req, res) => {
   res.render("listings/register.ejs");

@@ -19,6 +19,77 @@ body {
   transition: color 0.3s ease;
 }
 
+.fullsearch {
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 8px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.input-group-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  color: #0cc96b;
+}
+
+.form-control {
+  border: none;
+  box-shadow: none;
+}
+
+.form-control:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(12, 201, 107, 0.25);
+
+}
+
+.btn-color {
+  background-color: #0cc96b;
+
+  border: none;
+  color: white;
+  transition: background-color 0.3s ease;
+
+}
+
+.btn-color:hover {
+  background-color: #05ff32;
+}
+
+.btn-color:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(5, 255, 50, 0.25);
+}
+
+
+/* category section */
+.category-section {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.category-section::-webkit-scrollbar {
+  display: none;
+}
+
+.category-section button {
+  transition: all 0.3s ease;
+}
+
+.category-section button:hover {
+  background-color: #28a745;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.category-section button.active {
+  background-color: #198754;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
 
 
 /* About Section Hover Effects */
@@ -78,68 +149,75 @@ body {
   }
 }
 
-/* for login page  */
+/* for login page */
+
 .form-container {
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f8f9fa;
+  min-height: 70vh;
+  background-color: #f4f4f9;
   position: relative;
 }
 
-.shape {
-  position: absolute;
-  border-radius: 50%;
-  z-index: 0;
-}
-
-.shape1 {
-  width: 200px;
-  height: 200px;
-  top: -5rem;
-  left: -5rem;
-  background: linear-gradient(180deg, #12192c 0%, rgba(196, 196, 196, 0) 100%);
-}
-
-.shape2 {
-  width: 200px;
-  height: 200px;
-  bottom: -5rem;
-  right: -5rem;
-  background: linear-gradient(180deg, #12192c 0%, rgba(196, 196, 196, 0) 100%);
-}
-
 .form-box {
-  z-index: 1;
-  background: white;
+  background-color: white;
+  padding: 15px;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 2rem;
   width: 100%;
-  max-width: 400px;
+  max-width: 600px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .form-title {
-  font-size: 2rem;
-  font-weight: 500;
-  margin-bottom: 1.5rem;
+  font-size: 22px;
+  font-weight: bold;
+  color: #333;
 }
 
 .form-social-icon {
-  font-size: 1.5rem;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: #adb5bd;
-  color: white;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 0.5rem;
-  transition: all 0.3s;
+  font-size: 22px;
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 .form-social-icon:hover {
-  background: #12192c;
+  color: #0073e6;
+}
+
+.input-group-text {
+  background-color: #e8f5e9;
+}
+
+.input-group-lg .form-control {
+  height: calc(2.25rem + 2px);
+  font-size: 1.1rem;
+}
+
+button {
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #388e3c;
+}
+
+@media (max-width: 768px) {
+  .form-box {
+    width: 90%;
+    padding: 12px;
+
+  }
+}
+
+button:hover {
+  background-color: #388e3c;
+  transform: scale(1.05);
+}
+
+.form-social-icon:hover {
+  color: #0073e6;
+  transform: scale(1.1);
 }
