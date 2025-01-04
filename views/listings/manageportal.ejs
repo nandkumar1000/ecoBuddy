@@ -1,4 +1,15 @@
 <% layout('layout/boilerplate') %>
+  <style>
+    .managemaincontent {
+      background-color: #eafaf1;
+    }
+
+    .text {
+      text-decoration: none;
+      padding: 12px;
+      font-size: 1.1rem;
+    }
+  </style>
 
   <div class="container-fluid">
     <div class="row">
@@ -7,22 +18,22 @@
         <h4 class="mb-4 text-center text-primary">Manager Portal</h4>
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active" href="/manage-users">
+            <a class="text" href="/manage-users">
               <i class="bx bxs-user-circle"></i> Manage Users
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/view-reports">
+            <a class="text" href="/view-reports">
               <i class="bx bxs-file"></i> View Reports
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/track-projects">
+            <a class="text" href="/track-projects">
               <i class="bx bx-trophy"></i> Track Projects
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/settings">
+            <a class="text" href="/settings">
               <i class="bx bx-cog"></i> Settings
             </a>
           </li>
@@ -30,7 +41,7 @@
       </div>
 
       <!-- Main Content -->
-      <div class="col-md-9 col-lg-10 p-5">
+      <div class="col-md-9 col-lg-10 p-5 managemaincontent">
         <h2 class="text-success mb-4">Welcome to the Manager Portal</h2>
         <p class="lead text-muted">Use the navigation on the left to manage users, track projects, view reports, and
           configure settings. Stay up-to-date with Eco Buddy's operations!</p>

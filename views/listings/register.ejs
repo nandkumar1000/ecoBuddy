@@ -1,79 +1,11 @@
 <% layout('layout/boilerplate') %>
-
-  <!-- Registration Section -->
-  <h2 class="text-center animated-title mt-3">Join Eco Buddy</h2>
-  <p class="text-center text-muted mb-4 animated-text">Become part of our green initiative to make the world a better
-    place. Register now to access exclusive resources and contribute to our eco-friendly community.</p>
-
-  <!-- Eco Buddy Mission Section -->
-  <p class="text-center text-success animated-text">Our mission is to create a greener future by connecting like-minded
-    individuals. Join us in making a difference!</p>
-
-  <!-- Form Container -->
-  <div class="form-container animated-form mb-2">
-    <form action="" method="POST">
-      <!-- First Name -->
-      <div class="mb-3 form-group">
-        <label for="fname" class="form-label">First Name</label>
-        <input type="text" id="fname" name="fname" class="form-control form-control-lg animated-input"
-          placeholder="Enter your first name" required>
-      </div>
-
-      <!-- Last Name -->
-      <div class="mb-3 form-group">
-        <label for="lname" class="form-label">Last Name</label>
-        <input type="text" id="lname" name="lname" class="form-control form-control-lg animated-input"
-          placeholder="Enter your last name" required>
-      </div>
-
-      <!-- Email -->
-      <div class="mb-3 form-group">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" id="email" name="email" class="form-control form-control-lg animated-input"
-          placeholder="Enter your email address" required>
-      </div>
-
-      <!-- Password -->
-      <div class="mb-3 form-group">
-        <label for="password1" class="form-label">Password</label>
-        <div class="input-group input-group-lg">
-          <input type="password" id="password1" name="password" class="form-control animated-input"
-            placeholder="Create a password" required>
-          <span class="input-group-text" onclick="togglePassword('password1')">
-            <img src="https://img.icons8.com/fluency-systems-filled/48/FD7E14/visible.png" alt="Show">
-          </span>
-        </div>
-      </div>
-
-      <!-- Confirm Password -->
-      <div class="mb-3 form-group">
-        <label for="password2" class="form-label">Confirm Password</label>
-        <div class="input-group input-group-lg">
-          <input type="password" id="password2" name="password" class="form-control animated-input"
-            placeholder="Confirm your password" required>
-          <span class="input-group-text" onclick="togglePassword('password2')">
-            <img src="https://img.icons8.com/fluency-systems-filled/48/FD7E14/visible.png" alt="Show">
-          </span>
-        </div>
-      </div>
-
-      <!-- Submit Button -->
-      <button type="submit" class="btn btn-success w-100 mb-4 shadow-sm transform-on-hover animated-button">
-        Join the Eco Buddy Family
-      </button>
-    </form>
-  </div>
-
-  <!-- JavaScript for Toggle Password Visibility -->
-  <script>
-    function togglePassword(fieldId) {
-      const field = document.getElementById(fieldId);
-      field.type = field.type === 'password' ? 'text' : 'password';
-    }
-  </script>
-
   <!-- Styles -->
   <style>
+    .registerpage {
+      background-color: #eafaf1;
+      padding: 5px 5px;
+    }
+
     /* Background Animation for Title and Text */
     .animated-title {
       font-size: 2rem;
@@ -193,3 +125,76 @@
       }
     }
   </style>
+  <div class="registerpage">
+    <!-- Registration Section -->
+    <h2 class="text-center animated-title mt-3">Join Eco Buddy</h2>
+    <p class="text-center text-muted mb-4 animated-text">Become part of our green initiative to make the world a better
+      place. Register now to access exclusive resources and contribute to our eco-friendly community.</p>
+
+    <!-- Eco Buddy Mission Section -->
+    <p class="text-center text-success animated-text">Our mission is to create a greener future by connecting
+      like-minded
+      individuals. Join us in making a difference!</p>
+
+    <!-- Form Container -->
+    <div class="form-container animated-form mb-4 registerpage">
+      <form action="" method="POST">
+        <!-- First Name -->
+        <div class="mb-3 form-group">
+          <label for="fname" class="form-label">First Name</label>
+          <input type="text" id="fname" name="fname" class="form-control form-control-lg animated-input"
+            placeholder="Enter your first name" required>
+        </div>
+
+        <!-- Last Name -->
+        <div class="mb-3 form-group">
+          <label for="lname" class="form-label">Last Name</label>
+          <input type="text" id="lname" name="lname" class="form-control form-control-lg animated-input"
+            placeholder="Enter your last name" required>
+        </div>
+
+        <!-- Email -->
+        <div class="mb-3 form-group">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" id="email" name="email" class="form-control form-control-lg animated-input"
+            placeholder="Enter your email address" required>
+        </div>
+
+        <!-- Password -->
+        <div class="mb-3 form-group">
+          <label for="password1" class="form-label">Password</label>
+          <div class="input-group input-group-lg">
+            <input type="password" id="password1" name="password" class="form-control animated-input"
+              placeholder="Create a password" required>
+            <span class="input-group-text" onclick="togglePassword('password1')">
+              <img src="https://img.icons8.com/fluency-systems-filled/48/FD7E14/visible.png" alt="Show">
+            </span>
+          </div>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="mb-3 form-group">
+          <label for="password2" class="form-label">Confirm Password</label>
+          <div class="input-group input-group-lg">
+            <input type="password" id="password2" name="password" class="form-control animated-input"
+              placeholder="Confirm your password" required>
+            <span class="input-group-text" onclick="togglePassword('password2')">
+              <img src="https://img.icons8.com/fluency-systems-filled/48/FD7E14/visible.png" alt="Show">
+            </span>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-success w-100 mb-4 shadow-sm transform-on-hover animated-button">
+          Join the Eco Buddy Family
+        </button>
+      </form>
+    </div>
+  </div>
+  <!-- JavaScript for Toggle Password Visibility -->
+  <script>
+    function togglePassword(fieldId) {
+      const field = document.getElementById(fieldId);
+      field.type = field.type === 'password' ? 'text' : 'password';
+    }
+  </script>

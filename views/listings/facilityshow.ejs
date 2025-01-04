@@ -1,92 +1,183 @@
 <% layout('layout/boilerplate') %>
+  <style>
+    body {
+      background-color: #eafaf1;
+      font-family: Arial, sans-serif;
+    }
+
+    .showfacillity {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 22px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .showfacillity .card {
+      width: 100%;
+      max-width: 320px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 0;
+      animation: fadeIn 1s ease-in-out forwards;
+      animation-delay: 0.2s;
+    }
+
+    .showfacillity .card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .card img {
+      max-height: 180px;
+      object-fit: cover;
+    }
+
+    .card-body h5 {
+      font-weight: bold;
+      color: #333;
+    }
+
+    .btn {
+      margin-right: 5px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+
+    .btn-warning:hover {
+      background-color: #ec971f;
+    }
+
+    .btn-danger:hover {
+      background-color: #c9302c;
+    }
+
+    .btn-success:hover {
+      background-color: #449d44;
+    }
+
+    .reviews-section {
+      margin-top: 20px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .reviews-section .card {
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      opacity: 0;
+      animation: fadeIn 1s ease-in-out forwards;
+      animation-delay: 0.4s;
+    }
+
+    .reviews-section h5 {
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+
+    .text-muted {
+      font-style: italic;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 576px) {
+      .showfacillity {
+        flex-direction: column;
+        gap: 15px;
+      }
+    }
+  </style>
 
   <div class="container mt-4">
-    <h2 class="text-center">Facilities</h2>
-
-    <!-- Facilities List -->
-    <% facilities.forEach(facility=> { %>
-      <div class="card col-8 offset-2 mb-4">
-        <img src="<%= facility.Facility_Image %>" class="card-img-top" alt="Facility Image">
-        <div class="card-body">
-          <h5 class="card-title">
-            <%= facility.Facility_Title %>
-          </h5>
-          <p class="card-text">
-            <%= facility.Facility_Description %>
-          </p>
-          <p class="card-text"><strong>Category:</strong>
-            <%= facility.Facility_Category %>
-          </p>
-          <p class="card-text"><strong>Address:</strong>
-            <%= facility.Facility_Address %>
-          </p>
-          <p class="card-text"><strong>Status:</strong>
-            <%= facility.Facility_Status %>
-          </p>
-
-          <!-- Edit Facility Button -->
-          <form action="/facility/<%= facility._id %>/edit" method="GET" class="d-inline">
-            <button type="submit" class="btn btn-warning btn-sm">Edit Facility</button>
-          </form>
-
-          <!-- Delete Facility Button -->
-          <form action="/facility/<%= facility._id %>?_method=DELETE" method="POST" class="d-inline">
-            <button type="submit" class="btn btn-danger btn-sm">Delete Facility</button>
-          </form>
-
-          <!-- Add Review Form -->
-          <div class="mt-4">
-            <h5>Add a Review</h5>
-            <form action="/facility/<%= facility._id %>/reviews" method="POST">
-              <div class="mb-3">
-                <label for="rating" class="form-label">Rating (1-5)</label>
-                <input type="number" id="rating" name="rating" class="form-control" min="1" max="5" required>
-              </div>
-              <div class="mb-3">
-                <label for="comment" class="form-label">Comment</label>
-                <textarea id="comment" name="comment" class="form-control" rows="3" required></textarea>
-              </div>
-              <button type="submit" class="btn btn-success btn-sm">Submit Review</button>
+    <h2 class="text-center mb-4">Facilities</h2>
+    <div class="showfacillity">
+      <% facilities.forEach(facility=> { %>
+        <div class="card">
+          <img src="<%= facility.Facillity_Image %>" class="card-img-top" alt="Facility Image">
+          <div class="card-body">
+            <h5 class="card-title">
+              <%= facility.Facillity_Title %>
+            </h5>
+            <p class="card-text">
+              <%= facility.Facillity_Description %>
+            </p>
+            <p class="card-text"><strong>Category:</strong>
+              <%= facility.Facillity_Category %>
+            </p>
+            <p class="card-text"><strong>Address:</strong>
+              <%= facility.Facillity_Address %>
+            </p>
+            <p class="card-text"><strong>Status:</strong>
+              <%= facility.Facillity_Status %>
+            </p>
+            <form action="/facility/<%= facility._id %>/edit" method="GET" class="d-inline">
+              <button type="submit" class="btn btn-warning btn-sm">Edit Facility</button>
             </form>
-          </div>
-
-          <!-- List of Reviews -->
-          <div class="mt-5">
-            <h5>Reviews</h5>
-            <% if (reviews.length> 0) { %>
-              <% reviews.forEach(review=> { %>
-                <div class="card mb-3">
-                  <div class="card-body">
-                    <h6 class="card-title">Rating: <%= review.rating %>
-                    </h6>
-                    <p class="card-text">Comment: <%= review.comment %>
-                    </p>
-                    <p class="card-text"><strong>Posted by:</strong>
-                      <%= review.user.name || 'Anonymous' %>
-                    </p>
-                    <p class="card-text"><strong>Posted at:</strong>
-                      <%= new Date(review.createdAt).toLocaleString() %>
-                    </p>
-
-                    <!-- Edit Review Button -->
-                    <form action="/facility/<%= facility._id %>/reviews/<%= review._id %>/edit" method="GET"
-                      class="d-inline">
-                      <button type="submit" class="btn btn-primary btn-sm">Edit Review</button>
-                    </form>
-
-                    <!-- Delete Review Button -->
-                    <form action="/facility/<%= facility._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST"
-                      class="d-inline">
-                      <button type="submit" class="btn btn-danger btn-sm">Delete Review</button>
-                    </form>
-                  </div>
+            <form action="/facility/<%= facility._id %>?_method=DELETE" method="POST" class="d-inline">
+              <button type="submit" class="btn btn-danger btn-sm">Delete Facility</button>
+            </form>
+            <div class="mt-4">
+              <h5>Add a Review</h5>
+              <form action="/facility/<%= facility._id %>/reviews" method="POST">
+                <div class="mb-3">
+                  <label for="rating" class="form-label">Rating (1-5)</label>
+                  <input type="number" id="rating" name="rating" class="form-control" min="1" max="5" required>
                 </div>
-                <% }); %>
-                  <% } else { %>
-                    <p class="text-muted">No reviews yet. Be the first to review!</p>
-                    <% } %>
+                <div class="mb-3">
+                  <label for="comment" class="form-label">Comment</label>
+                  <textarea id="comment" name="comment" class="form-control" rows="3" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-success btn-sm">Submit Review</button>
+              </form>
+            </div>
+            <div class="reviews-section">
+              <h5>Reviews</h5>
+              <% if (reviews.length> 0) { %>
+                <% reviews.forEach(review=> { %>
+                  <div class="card mb-3">
+                    <div class="card-body">
+                      <h6 class="card-title">Rating: <%= review.rating %>
+                      </h6>
+                      <p class="card-text">Comment: <%= review.comment %>
+                      </p>
+                      <p class="card-text"><strong>Posted by:</strong>
+                        <%= review.user.name || 'Anonymous' %>
+                      </p>
+                      <p class="card-text"><strong>Posted at:</strong>
+                        <%= new Date(review.createdAt).toLocaleString() %>
+                      </p>
+                      <form action="/facility/<%= facility._id %>/reviews/<%= review._id %>/edit" method="GET"
+                        class="d-inline">
+                        <button type="submit" class="btn btn-primary btn-sm">Edit Review</button>
+                      </form>
+                      <form action="/facility/<%= facility._id %>/reviews/<%= review._id %>?_method=DELETE"
+                        method="POST" class="d-inline">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete Review</button>
+                      </form>
+                    </div>
+                  </div>
+                  <% }); %>
+                    <% } else { %>
+                      <p class="text-muted">No reviews yet. Be the first to review!</p>
+                      <% } %>
+            </div>
           </div>
         </div>
-      </div>
-      <% }); %>
+        <% }); %>
+    </div>
   </div>

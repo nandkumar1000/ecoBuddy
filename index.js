@@ -14,6 +14,7 @@ app.engine("ejs", ejsMate);
 
 // flash
 const flash = require("connect-flash");
+app.use(flash());
 // session
 const session = require("express-session");
 
@@ -41,7 +42,6 @@ app.get("/facilitate", async (req, res) => {
   try {
     const facilities = await dataconnect.find();
     const reviews = await Review.find();
-    // console.log(facilities);
     res.render("listings/facilityshow.ejs", { facilities, reviews });
   } catch (error) {
     console.error("Error fetching facilities:", error);
@@ -81,34 +81,6 @@ app.get('/facility/:facilityId/reviews/:reviewId/edit', async (req, res) => {
   }
 });
 
-// Handle Review Update Logic
-app.put('/facility/:facilityId/reviews/:reviewId', async (req, res) => {
-  try {
-    const { facilityId, reviewId } = req.params;
-    const { rating, comment } = req.body;
-
-    await Review.findByIdAndUpdate(reviewId, { rating, comment });
-    res.redirect(`/facility/${facilityId}`);
-  } catch (error) {
-    console.error('Error updating review:', error);
-    res.status(500).render('listings/error.ejs');
-  }
-});
-// Handle Review Deletion
-app.delete('/facility/:facilityId/reviews/:reviewId', async (req, res) => {
-  try {
-    const { facilityId, reviewId } = req.params;
-
-    await Review.findByIdAndDelete(reviewId);
-    res.redirect(`/facility/${facilityId}`);
-  } catch (error) {
-    console.error('Error deleting review:', error);
-    res.status(500).render('listings/error.ejs');
-  }
-});
-
-
-
 
 
 // for register 
@@ -124,6 +96,22 @@ app.get("/login", (req, res) => {
 app.get("/manageportal", (req, res) => {
   res.render("listings/manageportal.ejs");
 });
+// for active users
+app.get("/manage-users", (req, res) => {
+  res.render("listings/manage-users.ejs");
+})
+// for view-reports
+app.get("/view-reports", (req, res) => {
+  res.render("listings/view-reports.ejs")
+})
+// for track projects
+app.get("/track-projects", (req, res) => {
+  res.render("listings/track-projects.ejs")
+})
+// for settings
+app.get("/settings", (req, res) => {
+  res.render("listings/setting.ejs")
+})
 
 // for universal error
 app.get('*', (req, res) => {
