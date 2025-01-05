@@ -1,0 +1,16 @@
+<% layout('layout/boilerplate') %>
+  <div class="container mt-4">
+    <h2>Edit Review</h2>
+    <form action="/facilitate/<%= facilityId %>/reviews/<%= review._id %>" method="POST">
+      <div class="mb-3">
+        <label for="rating" class="form-label">Rating (1-5)</label>
+        <input type="number" id="rating" name="rating" class="form-control" min="1" max="5" value="<%= review.rating %>"
+          required>
+      </div>
+      <div class="mb-3">
+        <label for="comment" class="form-label">Comment</label>
+        <textarea id="comment" name="comment" class="form-control" rows="3" required><%= review.comment %></textarea>
+      </div>
+      <button type="submit" class="btn btn-success btn-sm">Update Review</button>
+    </form>
+  </div>

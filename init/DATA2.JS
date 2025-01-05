@@ -101,15 +101,15 @@ const sampleListingsdata = [
     Facillity_Image: "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8VXJiYW4lMjBGb3Jlc3QlMjBJfGVufDB8fDB8fHww"
   },
   {
-    Facility_Title: "Eco-Friendly Workshop J",
-    Facility_Category: "Education",
-    Facility_Description: "Learn eco-friendly practices and sustainable living.",
-    Facility_Address: "789 Knowledge Blvd, Boston, MA, 02110",
+    Facillity_Title: "Eco-Friendly Workshop J",
+    Facillity_Category: "Education",
+    Facillity_Description: "Learn eco-friendly practices and sustainable living.",
+    Facillity_Adderess: "789 Knowledge Blvd, Boston, MA, 02110",
     Facillity_Latitude: 42.3601,
-    Facility_Longitude: -71.0589,
+    Facillity_Longitude: -71.0589,
     facillity_Postcode: 60655,
-    Facility_Status: "Available",
-    Facility_Image: "https://plus.unsplash.com/premium_photo-1682309652843-ed4eb60d473e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fEVjbyUyMEZyaWVuZGx5JTIwV29ya3Nob3AlMjBKfGVufDB8fDB8fHww"
+    Facillity_Status: "Available",
+    Facillity_Image: "https://plus.unsplash.com/premium_photo-1682309652843-ed4eb60d473e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fEVjbyUyMEZyaWVuZGx5JTIwV29ya3Nob3AlMjBKfGVufDB8fDB8fHww"
   },
   {
     Facillity_Title: "Organic Farmers' Market K",
