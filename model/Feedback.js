@@ -16,6 +16,11 @@ const FeedbackSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  facilityId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Facility',
+    required: true
+  }
 });
 
 module.exports = mongoose.model("Feedback", FeedbackSchema);

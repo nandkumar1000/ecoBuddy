@@ -17,7 +17,9 @@ const flash = require("connect-flash");
 app.use(flash());
 // session
 const session = require("express-session");
-
+// Middleware
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 // Middleware for PUT operations
 const methodOverride = require('method-override');
 app.use(methodOverride("_method"));
@@ -73,7 +75,7 @@ app.get("/facilitate/:id", async (req, res) => {
     if (!facility) {
       return res.status(404).render("listings/error.ejs", { message: "Facility not found!" });
     }
-    res.render("listings/facilityshow.ejs", { facility, reviews });
+    res.render("./listings/facilityspec.ejs", { facility, reviews });
   } catch (error) {
     console.error("Error fetching facility:", error);
     res.status(500).render("listings/error.ejs", { message: "Server error. Please try again later." });
@@ -81,20 +83,23 @@ app.get("/facilitate/:id", async (req, res) => {
 });
 
 // Route to edit a specific facility
-app.get("/facilitate/:id/edit", async (req, res) => {
+app.get("/facilitate/edit/:id", async (req, res) => {
   try {
     const facility = await dataconnect.findById(req.params.id);
+    const reviews = await Review.find({ facilityId: req.params.id });
+    // console.log(req.params.id);
+
     if (!facility) {
       return res.status(404).render("listings/error.ejs", { message: "Facility not found for editing!" });
     }
-    res.render("listings/facilityedit.ejs", { facility });
+    res.render("listings/facilityedit.ejs", { facility, reviews });
   } catch (error) {
     console.error("Error fetching facility for edit:", error);
     res.status(500).render("listings/error.ejs", { message: "Server error. Please try again later." });
   }
 });
 // Rout to update a specific facility
-app.post('/facilitate/:id/edit', async (req, res) => {
+app.post('/facilitate/edit/:id', async (req, res) => {
   try {
     const facilityId = req.params.id;
     const { Facility_Title, Facility_Description, Facility_Category, Facility_Address, Facility_Status, Facility_Image } = req.body;
@@ -120,17 +125,15 @@ app.post('/facilitate/:id/edit', async (req, res) => {
 });
 
 // Route to Delete a specific facility
-app.delete('/facilitate/:id', async (req, res) => {
+app.delete('/facilitate/delete/:id', async (req, res) => {
   try {
     const { id } = req.params;
 
     const deletedFacility = await dataconnect.findByIdAndDelete(id);
 
     if (!deletedFacility) {
-      req.flash('error', 'Facility not found for deletion!');
       return res.redirect('/facilitate');
     }
-    req.flash('success', 'Facility deleted successfully!');
     res.redirect('/facilitate');
   } catch (error) {
     console.error('Error deleting facility:', error);
@@ -138,33 +141,40 @@ app.delete('/facilitate/:id', async (req, res) => {
   }
 });
 
+// route for review
+app.post('/facilitate/reviews/:id', async (req, res) => {
 
-//  review or feedback
-app.post('/facilitate/:id/reviews', async (req, res) => {
+
   try {
     const { rating, comment } = req.body;
-    const facilityId = req.params.id;
-    const userId = req.user._id;
-    const newReview = new Review({
-      rating,
-      comment,
-      facilityId,
-      userId
-    });
-    await newReview.save();
 
-    res.redirect(`/facilitate/${facilityId}`);
+    // Ensure that both rating and comment are provided
+    if (!rating || !comment) {
+      return res.status(400).send('Both rating and comment are required.');
+    }
+
+    const newReview = new Review({
+      Feedback_Rating: rating,
+      Feedback_Message: comment,
+      facilityId: req.params.id
+    });
+
+    await newReview.save();
+    res.redirect(`/facilitate/${req.params.id}`);
   } catch (error) {
     console.error('Error adding review:', error);
-    res.status(500).render('listings/error.ejs', { message: 'Server error. Please try again later.' });
+    res.status(500).send('Server error. Please try again later.');
   }
 });
+
+
 
 // edit review
 app.get('/facilitate/:facilityId/reviews/:reviewId/edit', async (req, res) => {
   try {
     const { facilityId, reviewId } = req.params;
     const review = await Review.findById(reviewId);
+
     if (!review) {
       return res.status(404).render('listings/error.ejs', { message: 'Review not found!' });
     }
@@ -175,6 +185,7 @@ app.get('/facilitate/:facilityId/reviews/:reviewId/edit', async (req, res) => {
     res.status(500).render('listings/error.ejs', { message: 'Server error. Please try again later.' });
   }
 });
+
 // update review
 app.post('/facilitate/:facilityId/reviews/:reviewId', async (req, res) => {
   try {
@@ -196,8 +207,9 @@ app.post('/facilitate/:facilityId/reviews/:reviewId', async (req, res) => {
     res.status(500).render('listings/error.ejs', { message: 'Server error. Please try again later.' });
   }
 });
-// delete review
-app.post('/facilitate/:facilityId/reviews/:reviewId?_method=DELETE', async (req, res) => {
+
+// Delete review
+app.delete('/facilitate/:facilityId/reviews/:reviewId', async (req, res) => {
   try {
     const { facilityId, reviewId } = req.params;
 
@@ -206,13 +218,14 @@ app.post('/facilitate/:facilityId/reviews/:reviewId?_method=DELETE', async (req,
     if (!deletedReview) {
       return res.status(404).render('listings/error.ejs', { message: 'Review not found!' });
     }
-    req.flash("success", "Review Deleted successfully!");
+
     res.redirect(`/facilitate/${facilityId}`);
   } catch (error) {
     console.error('Error deleting review:', error);
     res.status(500).render('listings/error.ejs', { message: 'Server error. Please try again later.' });
   }
 });
+
 
 // for log in and log out 
 // for register 
@@ -224,7 +237,18 @@ app.get("/register", (req, res) => {
 app.get("/login", (req, res) => {
   res.render("listings/login.ejs");
 })
-
+// for blog
+app.get("/blog", (req, res) => {
+  res.render("listings/blog.ejs");
+});
+// for FAQ
+app.get("/FAQ", (req, res) => {
+  res.render("listings/FAQ.ejs");
+})
+// for contact 
+app.get("/contact", (req, res) => {
+  res.render("listings/contact.ejs");
+});
 // for all operation of management portal
 // for manageportal 
 app.get("/manageportal", (req, res) => {

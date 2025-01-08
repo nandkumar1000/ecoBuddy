@@ -1,85 +1,98 @@
 <% layout('layout/boilerplate') %>
   <div class="container mt-4">
     <h2 class="text-center mb-4">Facility Details</h2>
+    <from method="post" action="/facilitate/<%= facility._id %>">
+      <!-- Facility Details -->
+      <div class="card">
+        <label for="image">image</label>
+        <input value="<%= facility._id %>"> <img src="<%= facility.Facillity_Image %>" class="card-img-top"
+          alt="Facility Image">
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= facility.Facillity_Title %>
+          </h5>
+          <p class="card-text">
+            <%= facility.Facillity_Description %>
+          </p>
+          <p><strong>Category:</strong>
+            <%= facility.Facillity_Category %>
+          </p>
+          <p><strong>Address:</strong>
+            <%= facility.Facillity_Address %>
+          </p>
+          <p><strong>Status:</strong>
+            <%= facility.Facillity_Status %>
+          </p>
 
-    <!-- Facility Details -->
-    <div class="card">
-      <img src="<%= facility.Facillity_Image || '/default-image.jpg' %>" class="card-img-top" alt="Facility Image">
-      <div class="card-body">
-        <h5 class="card-title">
-          <%= facility.Facillity_Title %>
-        </h5>
-        <p class="card-text">
-          <%= facility.Facillity_Description %>
-        </p>
-        <p><strong>Category:</strong>
-          <%= facility.Facillity_Category %>
-        </p>
-        <p><strong>Address:</strong>
-          <%= facility.Facillity_Address %>
-        </p>
-        <p><strong>Status:</strong>
-          <%= facility.Facillity_Status %>
-        </p>
-
-        <!-- Edit and Delete Buttons -->
-        <form action="/facilitate/<%= facility._id %>/edit" method="GET" class="d-inline">
-          <button type="submit" class="btn btn-warning btn-sm">Edit Facility</button>
-        </form>
-
-        <form action="/facilitate/<%= facility._id %>?_method=DELETE" method="POST" class="d-inline">
-          <button type="submit" class="btn btn-danger btn-sm">Delete Facility</button>
-        </form>
-
-
-        <!-- Add a Review -->
-        <div class="mt-4">
-          <h5>Add a Review</h5>
-          <form action="/facilitate/<%= facility._id %>/reviews" method="POST">
-            <div class="mb-3">
-              <label for="rating" class="form-label">Rating (1-5)</label>
-              <input type="number" id="rating" name="rating" class="form-control" min="1" max="5" required>
-            </div>
-            <div class="mb-3">
-              <label for="comment" class="form-label">Comment</label>
-              <textarea id="comment" name="comment" class="form-control" rows="3" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-success btn-sm">Submit Review</button>
+          <!-- Edit and Delete Buttons -->
+          <form action="/facilitate/<%= facility._id %>/edit" method="GET" class="d-inline">
+            <button type="submit" class="btn btn-warning btn-sm">Edit Facility</button>
           </form>
-        </div>
 
-        <!-- Reviews Section -->
-        <div class="reviews-section mt-4">
-          <h5>Reviews</h5>
-          <% if (reviews.length> 0) { %>
-            <% reviews.forEach(review=> { %>
-              <div class="card mb-3">
-                <div class="card-body">
-                  <h6 class="card-title">Rating: <%= review.rating %>
-                  </h6>
-                  <p class="card-text">Comment: <%= review.comment %>
-                  </p>
-                  <p><strong>Posted by:</strong>
-                    <%= review.user?.name || 'Anonymous' %>
-                  </p>
-                  <p><strong>Posted at:</strong>
-                    <%= new Date(review.createdAt).toLocaleString() %>
-                  </p>
+          <form action="/facilitate/delete/<%= facility._id %>?_method=DELETE" method="POST" class="d-inline">
+            <button type="submit" class="btn btn-danger btn-sm">Delete Facility</button>
+          </form>
 
-                  <!-- Edit and Delete Buttons for Reviews -->
-                  <form action="/facilitate/<%= facility._id %>/reviews/<%= review._id %>/edit" method="GET"
-                    class="d-inline">
-                    <button type="submit" class="btn btn-primary btn-sm">Edit Review</button>
-                  </form>
-                  <form action="/facilitate/<%= facility._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST"
-                    class="d-inline">
-                    <button type="submit" class="btn btn-danger btn-sm">Delete Review</button>
-                  </form>
-                </div>
-              </div>
-              <% }) %>
-                <% } else { %>
-                  <p class="text-muted">No reviews yet. Be the first to review!</p>
-                  <% } %>
+    </from>
+
+    <!-- Add a Review -->
+    <div class="mt-4">
+      <h5>Add a Review</h5>
+      <form action="/facilitate/reviews/<%= facility._id %>" method="POST">
+        <div class="mb-3">
+          <label for="rating" class="form-label">Rating (1-5)</label>
+          <input type="number" id="rating" name="rating" class="form-control" min="1" max="5" required>
         </div>
-      </div>
+        <div class="mb-3">
+          <label for="comment" class="form-label">Comment</label>
+          <textarea id="comment" name="comment" class="form-control" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-success btn-sm">Submit Review</button>
+      </form>
+    </div>
+
+
+    <!-- Reviews Section -->
+    <!-- for showing review -->
+    <div class="reviews-section">
+      <h5>Reviews</h5>
+      <% if (reviews.length> 0) { %>
+        <% reviews.forEach(review=> { %>
+          <div class="card mb-3">
+            <div class="card-body">
+              <h6 class="card-title">Rating: <%= review.Feedback_Rating %>
+              </h6>
+              <p class="card-text">Comment: <%= review.Feedback_Message %>
+              </p>
+              <p class="card-text"><strong>Posted by:</strong>
+                <%= review.user?.name || 'Anonymous' %>
+              </p>
+              <p class="card-text"><strong>Posted at:</strong>
+                <%= new Date(review.Feedback_Date).toLocaleString() %>
+              </p>
+
+
+              <!-- Edit Review Button -->
+              <form action="/facilitate/<%= facility._id %>/reviews/<%= review._id %>/edit" method="GET"
+                class="d-inline">
+                <button type="submit" class="btn btn-primary btn-sm">Edit Review</button>
+              </form>
+
+
+              <!-- Delete Review Button -->
+              <form action="/facilitate/<%= facility._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST"
+                class="d-inline">
+                <button type="submit" class="btn btn-danger btn-sm">Delete Review</button>
+              </form>
+
+            </div>
+          </div>
+          <% }); %>
+            <% } else { %>
+              <p class="text-muted">No reviews yet. Be the first to review!</p>
+              <% } %>
+    </div>
+
+
+    <!-- above -->
+  </div>
