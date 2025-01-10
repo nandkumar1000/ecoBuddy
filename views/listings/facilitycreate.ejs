@@ -1,68 +1,76 @@
 <% layout('layout/boilerplate') %>
   <!-- Facilities Section -->
-  <div class="row mt-3 mb-3">
-    <div class="col-8 offset-2">
-      <br><br>
-      <h3>Add Facilities</h3>
-      <form method="post" action="/facilitatecreate" class="needs-validation" novalidate>
-        <div class="mb-3">
-          <label for="FacillityTitle" class="form-label">Facillity Title</label>
-          <input type="text" npme="FacillityTitle" class="form-control" id="FacillityTitle"
-            placeholder="Enter your Facillity Title" required />
+  <div class="row mt-5 mb-5 justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow">
+        <div class="card-header bg-primary text-white text-center">
+          <h3>Add Facility</h3>
         </div>
+        <div class="card-body">
+          <form method="post" action="/facilitatecreate" class="needs-validation" novalidate>
+            <div class="mb-3">
+              <label for="FacillityTitle" class="form-label">Facility Title</label>
+              <input type="text" name="FacillityTitle" class="form-control" id="FacillityTitle"
+                placeholder="Enter your Facility Title" required />
+            </div>
 
-        <div class="mb-3">
-          <label for="FacillityCategory" class="form-label">Facillity Category</label>
-          <input type="text" name="FacillityCategory" class="form-control" id="FacillityCategory"
-            placeholder="Enter your Facillity Category" required />
+            <div class="mb-3">
+              <label for="FacillityCategory" class="form-label">Facility Category</label>
+              <input type="text" name="FacillityCategory" class="form-control" id="FacillityCategory"
+                placeholder="Enter your Facility Category" required />
+            </div>
+
+            <div class="mb-3">
+              <label for="FacillityDescription" class="form-label">Facility Description</label>
+              <textarea class="form-control" id="FacillityDescription" name="FacillityDescription"
+                placeholder="Enter your Facility Description" rows="4" required></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label for="FacillityAddress" class="form-label">Facility Address</label>
+              <input type="text" class="form-control" id="FacillityAddress" name="FacillityAddress"
+                placeholder="Enter your Facility Address" required />
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="FacillityLatitude" class="form-label">Latitude</label>
+                <input type="number" step="0.000001" name="FacillityLatitude" class="form-control"
+                  id="FacillityLatitude" placeholder="Enter Latitude" required />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="FacillityLongitude" class="form-label">Longitude</label>
+                <input type="number" step="0.000001" name="FacillityLongitude" class="form-control"
+                  id="FacillityLongitude" placeholder="Enter Longitude" required />
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="FacillityPostcode" class="form-label">Postcode</label>
+              <input type="number" name="FacillityPostcode" class="form-control" id="FacillityPostcode"
+                placeholder="Enter Postcode" required />
+            </div>
+
+            <div class="mb-3">
+              <label for="FacillityStatus" class="form-label">Status</label>
+              <select class="form-select" name="FacillityStatus" id="FacillityStatus" required>
+                <option value="">Select Status</option>
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="FacillityImage" class="form-label">Facility Image</label>
+              <input type="file" name="FacillityImage" class="form-control" id="FacillityImage" accept="image/*"
+                required />
+            </div>
+
+            <div class="d-grid">
+              <button type="submit" class="btn btn-primary btn-block">Add Facility</button>
+            </div>
+          </form>
         </div>
-
-        <div class="mb-3">
-          <label for="FacillityDescription" class="form-label">Facillity Description</label>
-          <textarea class="form-control" id="FacillityDescription" name="FacillityDescription"
-            placeholder="Enter your Facillity Description" rows="5" required></textarea>
-        </div>
-
-        <div class="mb-3">
-          <label for="FacillityAddress" class="form-label">Facillity Address</label>
-          <input type="text" class="form-control" id="FacillityAddress" name="FacillityAddress"
-            placeholder="Enter your Facillity Address" required />
-        </div>
-
-        <div class="mb-3">
-          <label for="FacillityLatitude" class="form-label">Facillity Latitude</label>
-          <input type="number" name="FacillityLatitude" class="form-control" id="FacillityLatitude"
-            placeholder="Enter your Facillity Latitude" required />
-        </div>
-
-        <div class="mb-3">
-          <label for="FacillityLongitude" class="form-label">Facillity Longitude</label>
-          <input type="number" name="FacillityLongitude" class="form-control" id="FacillityLongitude"
-            placeholder="Enter your Facillity Longitude" required />
-        </div>
-
-        <div class="mb-3">
-          <label for="FacillityPostcode" class="form-label">Facillity Postcode</label>
-          <input type="number" name="FacillityPostcode" class="form-control" id="FacillityPostcode"
-            placeholder="Enter your Facillity Postcode" required />
-        </div>
-
-        <div class="mb-3">
-          <label for="FacillityStatus" class="form-label">Facillity Status</label>
-          <select class="form-control" name="FacillityStatus" id="FacillityStatus">
-            <option value="">Select Status</option>
-            <option value="Active">Active</option>
-            <option value="Inactive">Inactive</option>
-          </select>
-        </div>
-
-        <div class="mb-3">
-          <label for="FacillityImage" class="form-label">Facillity Image</label>
-          <input type="file" name="FacillityStatus" class="form-control" id="FacillityImage" accept="image/*"
-            required />
-        </div>
-
-        <button type="submit" class="btn btn-primary">ADD</button>
-      </form>
+      </div>
     </div>
   </div>

@@ -59,11 +59,9 @@ app.get("/facilitatecreate", (req, res) => {
 // for showing data
 app.post("/facilitatecreate", async (req, res) => {
   try {
-    req.flash('success', 'Facility added successfully!');
     res.redirect("/facilitate")
   } catch (error) {
     console.error("Error fetching facilities:", error);
-    req.flash('error', 'Error adding facility. Please try again later.');
     res.status(500).render("listings/error.ejs");
   }
 });
@@ -87,7 +85,6 @@ app.get("/facilitate/edit/:id", async (req, res) => {
   try {
     const facility = await dataconnect.findById(req.params.id);
     const reviews = await Review.find({ facilityId: req.params.id });
-    // console.log(req.params.id);
 
     if (!facility) {
       return res.status(404).render("listings/error.ejs", { message: "Facility not found for editing!" });
@@ -98,31 +95,39 @@ app.get("/facilitate/edit/:id", async (req, res) => {
     res.status(500).render("listings/error.ejs", { message: "Server error. Please try again later." });
   }
 });
-// Rout to update a specific facility
-app.post('/facilitate/edit/:id', async (req, res) => {
+// ROUTE TO UPDATE FACILITY
+app.post('/facilitate/update/:id', async (req, res) => {
   try {
     const facilityId = req.params.id;
-    const { Facility_Title, Facility_Description, Facility_Category, Facility_Address, Facility_Status, Facility_Image } = req.body;
+    const {
+      Facillity_Title,
+      Facillity_Description,
+      Facillity_Category,
+      Facillity_Adderess,
+      Facillity_Status,
+      Facillity_Image,
+    } = req.body;
 
     const updatedFacility = await dataconnect.findByIdAndUpdate(facilityId, {
-      Facility_Title,
-      Facility_Description,
-      Facility_Category,
-      Facility_Address,
-      Facility_Status,
-      Facility_Image: Facility_Image,
+      Facillity_Title,
+      Facillity_Description,
+      Facillity_Category,
+      Facillity_Adderess,
+      Facillity_Status,
+      Facillity_Image,
     }, { new: true });
 
     if (!updatedFacility) {
       return res.status(404).render("listings/error.ejs", { message: "Facility not found!" });
     }
-    req.flash("success", "Facility Updated successfully!");
+
     res.redirect(`/facilitate/${updatedFacility._id}`);
   } catch (error) {
     console.error("Error updating facility:", error);
     res.status(500).render("listings/error.ejs", { message: "Server error. Please try again later." });
   }
 });
+
 
 // Route to Delete a specific facility
 app.delete('/facilitate/delete/:id', async (req, res) => {
@@ -193,14 +198,13 @@ app.post('/facilitate/:facilityId/reviews/:reviewId', async (req, res) => {
     const { rating, comment } = req.body;
     const updatedReview = await Review.findByIdAndUpdate(
       reviewId,
-      { rating, comment },
+      { Feedback_Rating: rating, Feedback_Message: comment },
       { new: true }
     );
 
     if (!updatedReview) {
       return res.status(404).render('listings/error.ejs', { message: 'Review not found!' });
     }
-    req.flash("success", "Review Updated successfully!");
     res.redirect(`/facilitate/${facilityId}`);
   } catch (error) {
     console.error('Error updating review:', error);
