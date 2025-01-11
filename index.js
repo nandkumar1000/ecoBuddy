@@ -274,6 +274,18 @@ app.get("/track-projects", (req, res) => {
 app.get("/settings", (req, res) => {
   res.render("listings/setting.ejs")
 })
+// for privacy-policy
+app.get("/privacy-policy", (req, res) => {
+  res.render("listings/privacy-policy.ejs")
+})
+// for terms-of-service
+app.get("/terms-of-service", (req, res) => {
+  res.render("listings/terms-of-service.ejs")
+})
+// for make-money
+app.get("/make-money", (req, res) => {
+  res.render("listings/make-money.ejs")
+})
 
 // for universal error
 app.get('*', (req, res) => {
