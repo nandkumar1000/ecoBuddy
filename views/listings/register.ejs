@@ -1,20 +1,20 @@
 <% layout('layout/boilerplate') %>
   <!-- Styles -->
   <style>
-    .registerpage {
+    .nand {
       background-color: #eafaf1;
       padding: 5px 5px;
     }
 
     /* Background Animation for Title and Text */
-    .animated-title {
+    .kumar {
       font-size: 2rem;
       font-weight: bold;
       color: #388e3c;
       animation: fadeInUp 1s ease-out;
     }
 
-    .animated-text {
+    .sahu {
       font-size: 1.1rem;
       animation: fadeInUp 1.5s ease-out;
     }
@@ -57,7 +57,7 @@
       transform: scale(1.03);
     }
 
-    .form-control-lg {
+    .nand-input {
       font-size: 1.1rem;
       height: calc(2.5rem + 2px);
       animation: slideIn 0.8s ease-out;
@@ -125,38 +125,37 @@
       }
     }
   </style>
-  <div class="registerpage">
+  <div class="nand">
     <!-- Registration Section -->
-    <h2 class="text-center animated-title mt-3">Join Eco Buddy</h2>
-    <p class="text-center text-muted mb-4 animated-text">Become part of our green initiative to make the world a better
-      place. Register now to access exclusive resources and contribute to our eco-friendly community.</p>
+    <h2 class="text-center kumar mt-3">Join Eco Buddy</h2>
+    <p class="text-center text-muted mb-4 sahu">Become part of our green initiative to make the world a better place.
+      Register now to access exclusive resources and contribute to our eco-friendly community.</p>
 
     <!-- Eco Buddy Mission Section -->
-    <p class="text-center text-success animated-text">Our mission is to create a greener future by connecting
-      like-minded
+    <p class="text-center text-success sahu">Our mission is to create a greener future by connecting like-minded
       individuals. Join us in making a difference!</p>
 
     <!-- Form Container -->
-    <div class="form-container animated-form mb-4 registerpage">
+    <div class="form-container animated-form mb-4 nand">
       <form action="" method="POST">
         <!-- First Name -->
         <div class="mb-3 form-group">
           <label for="fname" class="form-label">First Name</label>
-          <input type="text" id="fname" name="fname" class="form-control form-control-lg animated-input"
+          <input type="text" id="fname" name="fname" class="form-control form-control-lg animated-input nand-input"
             placeholder="Enter your first name" required>
         </div>
 
         <!-- Last Name -->
         <div class="mb-3 form-group">
           <label for="lname" class="form-label">Last Name</label>
-          <input type="text" id="lname" name="lname" class="form-control form-control-lg animated-input"
+          <input type="text" id="lname" name="lname" class="form-control form-control-lg animated-input nand-input"
             placeholder="Enter your last name" required>
         </div>
 
         <!-- Email -->
         <div class="mb-3 form-group">
           <label for="email" class="form-label">Email</label>
-          <input type="email" id="email" name="email" class="form-control form-control-lg animated-input"
+          <input type="email" id="email" name="email" class="form-control form-control-lg animated-input nand-input"
             placeholder="Enter your email address" required>
         </div>
 
@@ -164,7 +163,7 @@
         <div class="mb-3 form-group">
           <label for="password1" class="form-label">Password</label>
           <div class="input-group input-group-lg">
-            <input type="password" id="password1" name="password" class="form-control animated-input"
+            <input type="password" id="password1" name="password" class="form-control animated-input nand-input"
               placeholder="Create a password" required>
             <span class="input-group-text" onclick="togglePassword('password1')">
               <img src="https://img.icons8.com/fluency-systems-filled/48/FD7E14/visible.png" alt="Show">
@@ -176,7 +175,7 @@
         <div class="mb-3 form-group">
           <label for="password2" class="form-label">Confirm Password</label>
           <div class="input-group input-group-lg">
-            <input type="password" id="password2" name="password" class="form-control animated-input"
+            <input type="password" id="password2" name="password" class="form-control animated-input nand-input"
               placeholder="Confirm your password" required>
             <span class="input-group-text" onclick="togglePassword('password2')">
               <img src="https://img.icons8.com/fluency-systems-filled/48/FD7E14/visible.png" alt="Show">
