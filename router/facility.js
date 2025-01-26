@@ -26,8 +26,6 @@ router.post("/facilitatecreate", async (req, res) => {
   try {
     let newfacility = await new dataconnect(req.body.facility)
     await newfacility.save();
-
-
     res.redirect("/facilitate")
   } catch (error) {
     console.error("Error fetching facilities:", error);
