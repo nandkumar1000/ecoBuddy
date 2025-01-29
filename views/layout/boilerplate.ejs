@@ -27,7 +27,8 @@
   <%- include("../includes/navbar.ejs") %>
     <%- include("../includes/categorySection.ejs") %>
       <section>
-        <%- body -%>
+        <%- include("../includes/flash.ejs")%>
+          <%- body -%>
       </section>
       <%- include("../includes/footer.ejs") %>
         <!-- Bootstrap JS -->

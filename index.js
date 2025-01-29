@@ -13,13 +13,28 @@ const path = require('path');
 // require datbases data connecting
 const dataconnect = require("./model/Facillites");
 const Review = require('./model/Feedback')
+// Cookie parser middleware
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
 // Templating engine
 const ejsMate = require("ejs-mate");
 app.engine("ejs", ejsMate);
-
+// session
+const session = require("express-session");
 // flash
 const flash = require("connect-flash");
+app.use(session({
+  secret: 'secretKeyword',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    expires: Date.now() + 7 * 24 * 60 * 60 * 100,
+    maxAge: 7 * 24 * 60 * 60 * 100,
+    httpOnly: true
+  }
+}))
 app.use(flash());
+
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
@@ -39,8 +54,6 @@ const googleoauthuser = require('./model/oauthusergoogle');
 require('dotenv').config();
 // passport
 const passport = require('passport')
-// session
-const session = require("express-session");
 // googlestrategy
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 app.use(session({ secret: "secret", resave: false, saveUninitialized: true, }));
@@ -86,6 +99,12 @@ passport.deserializeUser(async (id, done) => {
     done(err, null);
   }
 });
+app.use((req, res, next) => {
+  res.locals.success = req.flash("success")
+  res.locals.error = req.flash("error")
+  res.locals.CurrUser = req.user;
+  next();
+})
 app.use('/', listingsRouter);
 app.use('/', ReviewRouter)
 app.use('/navigate', navigateRoute)
@@ -138,11 +157,15 @@ app.get("/login", (req, res) => {
 })
 
 
-// for universal error
+// for page not found error
 app.get('*', (req, res) => {
   res.render("listings/error.ejs");
 })
-
+// Global error handler
+app.use((err, req, res, next) => {
+  let { statusCode = 500, message = 'Something went wrong' } = err;
+  res.status(statusCode).render("listings/error", { message });
+});
 // server starting
 app.listen(port, () => {
   console.log(`server is running on port ${port}`)

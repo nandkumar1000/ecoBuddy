@@ -13,7 +13,8 @@ router.post('/facilitate/reviews/:id', async (req, res) => {
 
     // Ensure that both rating and comment are provided
     if (!rating || !comment) {
-      return res.status(400).send('Both rating and comment are required.');
+      req.flash("error", "Both rating and comment are required!");
+      return res.redirect(`/facilitate/${req.params.id}`);
     }
 
     const newReview = new Review({
@@ -23,10 +24,12 @@ router.post('/facilitate/reviews/:id', async (req, res) => {
     });
 
     await newReview.save();
+    req.flash("success", "Review added successfully!");
     res.redirect(`/facilitate/${req.params.id}`);
   } catch (error) {
     console.error('Error adding review:', error);
-    res.status(500).send('Server error. Please try again later.');
+    req.flash("error", "Server error. Please try again later.");
+    res.redirect(`/facilitate/${req.params.id}`);
   }
 });
 
@@ -39,13 +42,15 @@ router.get('/facilitate/:facilityId/reviews/:reviewId/edit', async (req, res) =>
     const review = await Review.findById(reviewId);
 
     if (!review) {
-      return res.status(404).render('listings/error.ejs', { message: 'Review not found!' });
+      req.flash("error", "Review not found!");
+      return res.redirect(`/facilitate/${facilityId}`);
     }
 
     res.render('listings/editReview.ejs', { review, facilityId });
   } catch (error) {
     console.error('Error fetching review for edit:', error);
-    res.status(500).render('listings/error.ejs', { message: 'Server error. Please try again later.' });
+    req.flash("error", "Server error. Please try again later.");
+    res.redirect(`/facilitate/${req.params.facilityId}`);
   }
 });
 
@@ -61,12 +66,15 @@ router.post('/facilitate/:facilityId/reviews/:reviewId', async (req, res) => {
     );
 
     if (!updatedReview) {
-      return res.status(404).render('listings/error.ejs', { message: 'Review not found!' });
+      req.flash("error", "Review not found!");
+      return res.redirect(`/facilitate/${facilityId}`);
     }
+    req.flash("success", "Your review was successfully updated!");
     res.redirect(`/facilitate/${facilityId}`);
   } catch (error) {
     console.error('Error updating review:', error);
-    res.status(500).render('listings/error.ejs', { message: 'Server error. Please try again later.' });
+    req.flash("error", "Server error. Please try again later.");
+    res.redirect(`/facilitate/${facilityId}`);
   }
 });
 
@@ -78,13 +86,15 @@ router.delete('/facilitate/:facilityId/reviews/:reviewId', async (req, res) => {
     const deletedReview = await Review.findByIdAndDelete(reviewId);
 
     if (!deletedReview) {
-      return res.status(404).render('listings/error.ejs', { message: 'Review not found!' });
+      req.flash("error", "Review not found!");
+      return res.redirect(`/facilitate/${facilityId}`);
     }
-
+    req.flash("success", "Your review was successfully deleted!");
     res.redirect(`/facilitate/${facilityId}`);
   } catch (error) {
     console.error('Error deleting review:', error);
-    res.status(500).render('listings/error.ejs', { message: 'Server error. Please try again later.' });
+    req.flash("error", "Server error. Please try again later.");
+    res.redirect(`/facilitate/${facilityId}`);
   }
 });
 

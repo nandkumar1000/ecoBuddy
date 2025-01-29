@@ -11,8 +11,8 @@ router.get("/facilitate", async (req, res) => {
     const reviews = await Review.find();
     res.render("listings/facilityshow.ejs", { facilities, reviews });
   } catch (error) {
-    console.error("Error fetching facilities:", error);
-    res.status(500).render("listings/error.ejs");
+    req.flash("error", "Error deleting facility.");
+    res.redirect('/facilitate');
   }
 });
 
@@ -21,11 +21,12 @@ router.get("/facilitatecreate", (req, res) => {
   res.render("listings/facilitycreate.ejs");
 });
 
-// for showing data
+// for create data
 router.post("/facilitatecreate", async (req, res) => {
   try {
     let newfacility = await new dataconnect(req.body.facility)
     await newfacility.save();
+    req.flash("success", "you added new item")
     res.redirect("/facilitate")
   } catch (error) {
     console.error("Error fetching facilities:", error);
@@ -43,8 +44,8 @@ router.get("/facilitate/:id", async (req, res) => {
     req.flash('succes', "Successfully edited")
     res.render("./listings/facilityspec.ejs", { facility, reviews });
   } catch (error) {
-    console.error("Error fetching facility:", error);
-    res.status(500).render("listings/error.ejs", { message: "Server error. Please try again later." });
+    req.flash("error", "Error deleting facility.");
+    res.redirect('/facilitate');
   }
 });
 
@@ -59,8 +60,8 @@ router.get("/facilitate/edit/:id", async (req, res) => {
     }
     res.render("listings/facilityedit.ejs", { facility, reviews });
   } catch (error) {
-    console.error("Error fetching facility for edit:", error);
-    res.status(500).render("listings/error.ejs", { message: "Server error. Please try again later." });
+    req.flash("error", "Error deleting facility.");
+    res.redirect('/facilitate');
   }
 });
 // ROUTE TO UPDATE FACILITY
@@ -86,13 +87,14 @@ router.post('/facilitate/update/:id', async (req, res) => {
     }, { new: true });
 
     if (!updatedFacility) {
-      return res.status(404).render("listings/error.ejs", { message: "Facility not found!" });
+      req.flash("error", "Facility not found!");
+      return res.redirect("/facilitate");
     }
-
+    req.flash("success", "Update Successful!");
     res.redirect(`/facilitate/${updatedFacility._id}`);
   } catch (error) {
-    console.error("Error updating facility:", error);
-    res.status(500).render("listings/error.ejs", { message: "Server error. Please try again later." });
+    req.flash("error", "Server error. Please try again later.");
+    res.redirect("/facilitate");
   }
 });
 
@@ -105,12 +107,14 @@ router.delete('/facilitate/delete/:id', async (req, res) => {
     const deletedFacility = await dataconnect.findByIdAndDelete(id);
 
     if (!deletedFacility) {
+      req.flash("error", "Facility not found!");
       return res.redirect('/facilitate');
     }
+    req.flash("success", "Deletion Successful!");
     res.redirect('/facilitate');
   } catch (error) {
-    console.error('Error deleting facility:', error);
-    res.status(500).render('listings/error.ejs', { message: 'Server error. Please try again later.' });
+    req.flash("error", "Error deleting facility.");
+    res.redirect('/facilitate');
   }
 });
 module.exports = router
