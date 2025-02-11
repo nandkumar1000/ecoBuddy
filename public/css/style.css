@@ -98,7 +98,7 @@
   }
 
 
-  /* pannel section */
+  /*category pannel section */
   #filters {
     display: flex;
     flex-wrap: wrap;
@@ -112,11 +112,12 @@
     opacity: 0.7;
     transition: opacity 0.3s ease, transform 0.3s ease;
     cursor: pointer;
+    z-index: 100;
   }
 
   .filter:hover {
     opacity: 1;
-    cursor: pointer;
+    cursor: pointer !important;
     transform: scale(1.1);
   }
 
