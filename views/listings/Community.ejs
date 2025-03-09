@@ -1,0 +1,37 @@
+<% layout('layout/boilerplate') %>
+  <section class="container mt-4">
+    <div class="row">
+      <!-- Community Section (70%) -->
+      <div class="col-md-8">
+        <h2 class="mb-3"> Community</h2>
+        <p class="text-muted">User Contributions</p>
+
+        <% Communities.forEach(Community=> { %>
+          <div class="card mb-3 shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">
+                <%= Community.question %>
+              </h5>
+              <hr>
+              <p class="card-text">
+                <%= Community.answer %>
+              </p>
+              <small class="text-muted">
+                <%= Community.Community_Date.toDateString() %>
+              </small>
+            </div>
+          </div>
+          <% }); %>
+      </div>
+
+      <!-- Advertisement Section (30%) -->
+      <div class="col-md-4">
+        <div class="card bg-light shadow-sm p-3">
+          <h4 class="text-center">Advertisement</h4>
+          <img src="https://www.strunkmedia.com/wp-content/uploads/2016/02/advertising.jpg" class="img-fluid my-2"
+            alt="Ad Banner">
+          <p class="text-muted text-center">Your ad could be here!</p>
+        </div>
+      </div>
+    </div>
+  </section>

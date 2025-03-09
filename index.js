@@ -7,12 +7,14 @@ const connectionDatbase = require("./config/mongoose");
 const listingsRouter = require('./router/facility.js');
 const ReviewRouter = require('./router/review.js')
 const navigateRoute = require('./router/navigateRoute.js')
+const CommunityRouter = require('./router/CommunityRouter.js')
 
 // require path
 const path = require('path');
 // require datbases data connecting
 const dataconnect = require("./model/Facillites");
 const Review = require('./model/Feedback')
+const Community = require('./model/community.js');
 // Cookie parser middleware
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
@@ -96,7 +98,7 @@ passport.deserializeUser(async (id, done) => {
     const user = await User.findById(id);
     done(null, user);
   } catch (err) {
-    done(err, null);
+    done(err, null); 
   }
 });
 app.use((req, res, next) => {
@@ -106,6 +108,7 @@ app.use((req, res, next) => {
   next();
 })
 app.use('/', listingsRouter);
+app.use('/', CommunityRouter);
 app.use('/', ReviewRouter)
 app.use('/navigate', navigateRoute)
 // default route
